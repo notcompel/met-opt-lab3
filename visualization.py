@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 def visualize(f, hist, name=""):
     # Define the range of values for x and y
-    x_vals = np.linspace(-5, 5, 1000)
-    y_vals = np.linspace(-5, 5, 1000)
+    x_vals = np.linspace(-3, 3, 1000)
+    y_vals = np.linspace(-3, 3, 1000)
 
     # Create a 2D meshgrid
     X, Y = np.meshgrid(x_vals, y_vals)

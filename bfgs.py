@@ -42,8 +42,8 @@ class BFGS:
             y = next_grad - grad_v
 
             ro = 1.0 / (np.dot(y, s))
-            A1 = I - ro * s[:, np.newaxis] * y[np.newaxis, :]
-            A2 = I - ro * y[:, np.newaxis] * s[np.newaxis, :]
+            A1 = I - ro * np.outer(s, y)
+            A2 = I - ro * np.outer(y, s)
             H = np.dot(A1, np.dot(H, A2)) + (ro * s[:, np.newaxis] *
                                              s[np.newaxis, :])
 

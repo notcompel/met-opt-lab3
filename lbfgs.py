@@ -1,20 +1,21 @@
 from copy import copy
 
 import numpy as np
+import scipy as sp
 
 from visualization import visualize
-from wolfe import generate_wolfe
+from wolfe import generate_wolfe, wolfe_gradient
 
 
 class LBFGS:
     def __init__(self, f, grad_f, start_pos, learning_rate):
-        self.m = 10
+        self.m = 100
 
         self.f = f
         self.grad_f = grad_f
         self.start_pos = start_pos
         self.learning_rate = learning_rate
-        self.wolfe = generate_wolfe(0.9, 0.0001, 0.9, 1000)
+        self.wolfe = generate_wolfe(5.0, 0.0001, 0.9, 1000)
 
     def process(self):
         hist = self.calculate_history()
@@ -28,10 +29,7 @@ class LBFGS:
         it = 0
 
         I = np.eye(len(vector))
-        H = I
 
-        # S = [[0, 0]] * self.m
-        # Y = [[0, 0]] * self.m
         S = []
         Y = []
 
@@ -39,7 +37,7 @@ class LBFGS:
 
             grad_v = self.grad_f(vector)
 
-            if it > 10:
+            if it > self.m:
                 gamma = np.dot(S[-1], Y[-1]) / np.dot(Y[-1], Y[-1])
                 Hk0 = gamma * I
             else:
@@ -55,7 +53,7 @@ class LBFGS:
                 q -= alpha * yi
                 i -= 1
 
-            r = np.dot(Hk0, q)
+            r = np.matmul(q, Hk0)
             i = 0
             while i != len(S):
                 yi = Y[i]
@@ -67,7 +65,11 @@ class LBFGS:
                 i += 1
 
             p = -r
-            lr = self.wolfe(vector, p, self.f, self.grad_f)[0]
+            # lr = wolfe_gradient(self.f, self.grad_f, vector)[0]
+            # next_vector = wolfe_gradient(self.f, self.grad_f, vector)[0]
+            lr = sp.optimize.line_search(self.f, self.grad_f, vector, p)[0]
+            if lr is None:
+                break
 
             next_vector = vector + lr * p
             next_grad = self.grad_f(next_vector)

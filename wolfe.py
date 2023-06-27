@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def generate_wolfe(start_alpha, c1, c2, max_iter):
     def wolfe(vector, p, f: callable, grad_f: callable) -> tuple[float, int, int]:
         alpha = start_alpha
@@ -15,14 +14,18 @@ def generate_wolfe(start_alpha, c1, c2, max_iter):
             count_f += 1
 
             v_new = vector + alpha * p
+            print(v_new)
             f_val_new = f(v_new)
+
+            print(f_val_new)
 
             if f_val_new <= f_val + c1 * alpha * np.dot(grad_val, p):  # Armijo condition
                 count_grad += 1
                 if np.dot(grad_f(v_new), p) >= c2 * np.dot(grad_val, p):  # Curvature condition
                     break
 
-            alpha /= 2
+            alpha -= 0.01
+            # alpha /= 2
 
         return alpha, count_f, count_grad
 
