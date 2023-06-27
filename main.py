@@ -1,12 +1,7 @@
-import math
-
 import numpy as np
-from numpy import cos, sin
 
-from bfgs import BFGS
 from lbfgs import LBFGS
-from descent import GradientDescent
-from linear_regression import test_linear_regression, generate_functions_and_grads
+from linear_regression import generate_functions_and_grads
 
 
 def const_lr(step):
