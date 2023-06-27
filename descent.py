@@ -3,7 +3,7 @@ from copy import copy
 import numpy as np
 
 from visualization import visualize
-from upgrades import UpgradeCore
+from upgrades import UpgradeCore, UpgradeType
 
 
 class GradientDescent:
@@ -13,12 +13,21 @@ class GradientDescent:
         self.start_pos = start_pos
         self.learning_rate = learning_rate
 
-    def process(self):
-        core = UpgradeCore(len(self.start_pos))
+    # def process(self):
+    #     core = UpgradeCore(len(self.start_pos))
+    #
+    #     hist = self.calculate_history(core)
+    #
+    #     visualize(self.f, hist)
+
+    def process(self, upgrade_type: UpgradeType):
+        core = UpgradeCore(upgrade_type, len(self.start_pos))
+
+        print("\nStarted {}.".format(upgrade_type.name))
 
         hist = self.calculate_history(core)
 
-        visualize(self.f, hist)
+        visualize(self.f, hist, upgrade_type.name)
 
     def calculate_history(self, upgrade_core: UpgradeCore) -> np.array:
         vector = copy(self.start_pos)

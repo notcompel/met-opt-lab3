@@ -4,7 +4,7 @@ import numpy as np
 import scipy as sp
 
 from visualization import visualize
-from wolfe import generate_wolfe, wolfe_gradient
+from wolfe import generate_wolfe
 
 
 class LBFGS:
@@ -65,8 +65,6 @@ class LBFGS:
                 i += 1
 
             p = -r
-            # lr = wolfe_gradient(self.f, self.grad_f, vector)[0]
-            # next_vector = wolfe_gradient(self.f, self.grad_f, vector)[0]
             lr = sp.optimize.line_search(self.f, self.grad_f, vector, p)[0]
             if lr is None:
                 break
