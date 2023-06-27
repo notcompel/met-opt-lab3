@@ -1,5 +1,5 @@
-from UnconstrainedOptimization.algorithms.trust_region.step_finders import *
-from UnconstrainedOptimization.functions import *
+from step_finders import *
+from functions import *
 
 
 def model(f, g, b, x, p, delta):

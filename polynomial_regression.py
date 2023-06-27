@@ -1,12 +1,11 @@
 import math
-import random
 from enum import Enum
 
 import numpy as np
 
 import matplotlib.pyplot as plt
-from descent import end_condition, jump_condition, log_steps
-from linear_regression import random_float, visualize_f_set
+from descent import end_condition, log_steps
+from linear_regression import random_float
 from upgrades import UpgradeCore
 
 
