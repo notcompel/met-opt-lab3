@@ -121,3 +121,5 @@ def test():
     plt.plot(x_data, f(x_data, x_opt), label="Fit")
     plt.legend()
     plt.show()
+
+test()
