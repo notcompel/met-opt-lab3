@@ -1,20 +1,4 @@
-from UnconstrainedOptimization.algorithms.linalg_utils import *
-
-
-def cauchy_point_step_finder(gx, b, delta):
-    gt_b_g = np.matmul(np.atleast_1d(np.matmul(gx.T, b)), gx)
-    g_norm = la.norm(gx)
-    if gt_b_g <= 0:
-        taw = 1
-    else:
-        taw = min(g_norm**3./(delta*gt_b_g), 1.)
-    cp = -1. * (taw*delta/g_norm) * gx
-    mul = np.floor(delta / la.norm(cp).astype('f')) * (1-1e-3)
-    if mul == 0:
-        return cp * (1-1e-3)
-    else:
-        return mul * cp
-
+from linalg_utils import *
 
 def solve_taw_for_dogleg(pu, pb, delta):
     a = np.dot(pu-pb, pu-pb)
