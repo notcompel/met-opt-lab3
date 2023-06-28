@@ -1,7 +1,10 @@
+import math
+
 import numpy as np
 
 from bfgs import BFGS
 from descent import GradientDescent
+from lab2 import test_linear_regression
 from lbfgs import LBFGS
 from linear_regression import generate_functions_and_grads
 from upgrades import UpgradeType
@@ -29,30 +32,37 @@ points, f_set, grad_set = generate_functions_and_grads(50)
 test_f = f
 test_grad = grad_f
 
-bfgs = BFGS(
-    test_f, test_grad, np.array([3.0, -3.0]), const_lr
-)
-bfgs.process()
+# bfgs = BFGS(
+#     test_f, test_grad, np.array([3.0, -3.0]), const_lr
+# )
+# bfgs.process()
 
 
-lbfgs = LBFGS(
-    test_f, test_grad, np.array([3.0, -3.0]), const_lr
-)
-lbfgs.process()
+# lbfgs = LBFGS(
+#     test_f, test_grad, np.array([3.0, -3.0]), const_lr
+# )
+# lbfgs.process()
 
 
 test_f = f
 test_grad = grad_f
 
-descent = GradientDescent(
-    test_f, test_grad, np.array([3.0, -3.0]), const_lr
-)
+# descent = GradientDescent(
+#     test_f, test_grad, np.array([3.0, -3.0]), const_lr
+# )
 
 
-descent.process(UpgradeType.Empty)
-descent.process(UpgradeType.Nesterov)
-descent.process(UpgradeType.Momentum)
-descent.process(UpgradeType.AdaGrad)
-descent.process(UpgradeType.RMSProp)
-descent.process(UpgradeType.Adam)
+
+def exp_lr(step):
+    return 0.1 * math.exp(-0.01 * step - 2)
+
+test_linear_regression(200, 1, exp_lr)
+
+
+# descent.process(UpgradeType.Empty)
+# descent.process(UpgradeType.Nesterov)
+# descent.process(UpgradeType.Momentum)
+# descent.process(UpgradeType.AdaGrad)
+# descent.process(UpgradeType.RMSProp)
+# descent.process(UpgradeType.Adam)
 
