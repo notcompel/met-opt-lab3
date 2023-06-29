@@ -94,32 +94,32 @@ def jacobian(v, residual):
         J.append((shifted - real) / eps)
     J = np.array(J).T
 
-bfgs = BFGS(
-    test_f, test_grad, np.array([3.0, -3.0]), const_lr
-)
-bfgs.process()
+# bfgs = BFGS(
+#     test_f, test_grad, np.array([3.0, -3.0]), const_lr
+# )
+# bfgs.process()
+#
+#
+# lbfgs = LBFGS(
+#     test_f, test_grad, np.array([3.0, -3.0]), const_lr
+# )
+# lbfgs.process()
+#
+#     x_data = np.linspace(0, 1, 20)
+#     ab_true = np.array([1.0, 0.1])
+#     y_data = f(x_data, ab_true)
+#
+#     ab_start = np.array([10.0, 5.0])
+#
+# descent = GradientDescent(
+#     test_f, test_grad, np.array([3.0, -3.0]), const_lr
+# )
 
 
-lbfgs = LBFGS(
-    test_f, test_grad, np.array([3.0, -3.0]), const_lr
-)
-lbfgs.process()
-
-    x_data = np.linspace(0, 1, 20)
-    ab_true = np.array([1.0, 0.1])
-    y_data = f(x_data, ab_true)
-
-    ab_start = np.array([10.0, 5.0])
-
-descent = GradientDescent(
-    test_f, test_grad, np.array([3.0, -3.0]), const_lr
-)
-
-
-descent.process(UpgradeType.Empty)
-descent.process(UpgradeType.Nesterov)
-descent.process(UpgradeType.Momentum)
-descent.process(UpgradeType.AdaGrad)
-descent.process(UpgradeType.RMSProp)
-descent.process(UpgradeType.Adam)
+# descent.process(UpgradeType.Empty)
+# descent.process(UpgradeType.Nesterov)
+# descent.process(UpgradeType.Momentum)
+# descent.process(UpgradeType.AdaGrad)
+# descent.process(UpgradeType.RMSProp)
+# descent.process(UpgradeType.Adam)
 
