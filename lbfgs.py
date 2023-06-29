@@ -8,13 +8,12 @@ from wolfe import generate_wolfe
 
 
 class LBFGS:
-    def __init__(self, f, grad_f, start_pos, learning_rate):
+    def __init__(self, f, grad_f, start_pos):
         self.m = 100
 
         self.f = f
         self.grad_f = grad_f
         self.start_pos = start_pos
-        self.learning_rate = learning_rate
         self.wolfe = generate_wolfe(5.0, 0.0001, 0.9, 1000)
 
     def process(self):

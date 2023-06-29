@@ -7,16 +7,16 @@ from wolfe import generate_wolfe
 
 
 class BFGS:
-    def __init__(self, f, grad_f, start_pos, learning_rate):
+    def __init__(self, f, grad_f, start_pos):
         self.f = f
         self.grad_f = grad_f
         self.start_pos = start_pos
-        self.learning_rate = learning_rate
         self.wolfe = generate_wolfe(0.9, 0.0001, 0.9, 1000)
 
     def process(self):
         hist = self.calculate_history()
-        visualize(self.f, hist)
+        # visualize(self.f, hist)
+        return hist[-1]
 
     def calculate_history(self) -> np.array:
         vector = copy(self.start_pos)
